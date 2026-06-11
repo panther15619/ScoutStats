@@ -13,6 +13,7 @@ function saveProfile() {
     );
 
     alert("Profile Saved!");
+window.location.href = "dashboard.html";
 }
 function saveMatch() {
 

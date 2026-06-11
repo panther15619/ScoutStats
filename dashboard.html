@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="profile-container">
+
+    <h1>⚽ My Dashboard</h1>
+
+    <div id="stats"></div>
+
+    <br>
+
+    <button onclick="window.location.href='add_match.html'">
+        Add Match
+    </button>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+
+const matches =
+JSON.parse(localStorage.getItem("matches")) || [];
+
+let goals = 0;
+let assists = 0;
+
+matches.forEach(match => {
+    goals += Number(match.goals);
+    assists += Number(match.assists);
+});
+
+document.getElementById("stats").innerHTML = `
+    <h2>Matches Played: ${matches.length}</h2>
+    <h2>Goals: ${goals}</h2>
+    <h2>Assists: ${assists}</h2>
+`;
+
+</script>
+
+</body>
+</html>

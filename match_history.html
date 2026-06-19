@@ -8,7 +8,7 @@
 
 <div class="profile-container">
 
-    <h1>📖 Match History</h1>
+    <h1>📖 Football Journal</h1>
 
     <div id="matchList"></div>
 
@@ -27,39 +27,38 @@ JSON.parse(localStorage.getItem("matches")) || [];
 
 let output = "";
 
-matches.forEach(match => {
+matches
+.reverse()
+.forEach(match => {
 
-    output += `
-    <div class="card">
+output += `
 
-        <h2>⚽ vs ${match.opponent}</h2>
+<div class="card">
 
-        <p><strong>⭐ Rating:</strong> ${match.rating}</p>
+<h2>⚽ vs ${match.opponent}</h2>
 
-        <p><strong>Competition:</strong> ${match.competition}</p>
+<p><strong>📅 Date:</strong> ${match.matchDate}</p>
 
-        <p><strong>Minutes:</strong> ${match.minutes}</p>
+<p><strong>🏆 Competition:</strong> ${match.competition}</p>
 
-        <p><strong>Goals:</strong> ${match.goals}</p>
+<p><strong>⭐ Rating:</strong> ${match.rating}</p>
 
-        <p><strong>Assists:</strong> ${match.assists}</p>
+<p><strong>Goals:</strong> ${match.goals}</p>
 
-        <p><strong>Shots On Target:</strong> ${match.shotsOnTarget}</p>
+<p><strong>Assists:</strong> ${match.assists}</p>
 
-        <p><strong>Shots Off Target:</strong> ${match.shotsOffTarget}</p>
+<hr>
 
-        <p><strong>1v1 Won:</strong> ${match.oneVOneWon}</p>
+<p><strong>📝 Reflection</strong></p>
 
-        <p><strong>1v1 Lost:</strong> ${match.oneVOneLost}</p>
+<p>${match.reflection}</p>
 
-        <p><strong>Reflection:</strong></p>
+</div>
 
-        <p>${match.reflection}</p>
+<br>
 
-    </div>
+`;
 
-    <br>
-    `;
 });
 
 document.getElementById("matchList").innerHTML = output;

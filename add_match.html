@@ -8,12 +8,18 @@
 
 <div class="profile-container">
 
-    <h1>Log A Match ⚽</h1>
+    <h1>⚽ Log A Match</h1>
 
     <input id="opponent" placeholder="Opponent">
     <br><br>
 
     <input id="competition" placeholder="Competition">
+    <br><br>
+
+    <label>Match Date</label>
+    <br><br>
+
+    <input id="matchDate" type="date">
     <br><br>
 
     <input id="minutes" placeholder="Minutes Played" type="number">
@@ -37,10 +43,18 @@
     <input id="oneVOneLost" placeholder="1v1 Lost" type="number">
     <br><br>
 
-    <textarea id="reflection" placeholder="Match Reflection"></textarea>
+    <textarea
+        id="reflection"
+        placeholder="How did you play today?"
+        rows="5"
+        style="width:100%;padding:12px;border-radius:10px;">
+    </textarea>
+
     <br><br>
 
-    <button onclick="saveMatch()">Save Match</button>
+    <button onclick="saveMatch()">
+        Save Match
+    </button>
 
 </div>
 

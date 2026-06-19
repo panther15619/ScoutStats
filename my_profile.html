@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="profile-container">
+
+    <h1>👤 My Profile</h1>
+
+    <div id="profileInfo"></div>
+
+    <br><br>
+
+    <button onclick="window.location.href='dashboard.html'">
+        Back To Dashboard
+    </button>
+
+</div>
+
+<script>
+
+const profile =
+JSON.parse(localStorage.getItem("playerProfile"));
+
+const matches =
+JSON.parse(localStorage.getItem("matches")) || [];
+
+let goals = 0;
+let assists = 0;
+let ratings = 0;
+
+matches.forEach(match => {
+    goals += Number(match.goals);
+    assists += Number(match.assists);
+    ratings += Number(match.rating);
+});
+
+const averageRating =
+matches.length > 0
+? (ratings / matches.length).toFixed(1)
+: "0.0";
+
+document.getElementById("profileInfo").innerHTML = `
+
+<h2>${profile.name}</h2>
+
+<p>🎂 Age: ${profile.age}</p>
+
+<p>⚽ Position: ${profile.position}</p>
+
+<p>🏟️ Team: ${profile.team}</p>
+
+<hr>
+
+<p>📅 Matches Played: ${matches.length}</p>
+
+<p>⚽ Total Goals: ${goals}</p>
+
+<p>🎯 Total Assists: ${assists}</p>
+
+<p>⭐ Average Rating: ${averageRating}</p>
+
+`;
+
+</script>
+
+</body>
+</html>

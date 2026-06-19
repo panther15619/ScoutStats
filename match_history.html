@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Match History</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="profile-container">
+
+    <h1>📖 Match History</h1>
+
+    <div id="matchList"></div>
+
+    <br><br>
+
+    <button onclick="window.location.href='dashboard.html'">
+        Back To Dashboard
+    </button>
+
+</div>
+
+<script>
+
+const matches =
+JSON.parse(localStorage.getItem("matches")) || [];
+
+let output = "";
+
+matches.forEach(match => {
+
+    output += `
+    <div class="card">
+
+        <h2>⚽ vs ${match.opponent}</h2>
+
+        <p><strong>Competition:</strong> ${match.competition}</p>
+
+        <p><strong>Minutes:</strong> ${match.minutes}</p>
+
+        <p><strong>Goals:</strong> ${match.goals}</p>
+
+        <p><strong>Assists:</strong> ${match.assists}</p>
+
+        <p><strong>Shots On Target:</strong> ${match.shotsOnTarget}</p>
+
+        <p><strong>Shots Off Target:</strong> ${match.shotsOffTarget}</p>
+
+        <p><strong>1v1 Won:</strong> ${match.oneVOneWon}</p>
+
+        <p><strong>1v1 Lost:</strong> ${match.oneVOneLost}</p>
+
+        <p><strong>Reflection:</strong></p>
+
+        <p>${match.reflection}</p>
+
+    </div>
+
+    <br>
+    `;
+});
+
+document.getElementById("matchList").innerHTML = output;
+
+</script>
+
+</body>
+</html>

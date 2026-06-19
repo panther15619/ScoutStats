@@ -39,6 +39,9 @@ function saveMatch() {
         competition:
         document.getElementById("competition").value,
 
+        matchDate:
+        document.getElementById("matchDate").value,
+
         minutes:
         document.getElementById("minutes").value,
 

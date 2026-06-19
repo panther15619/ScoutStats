@@ -35,16 +35,64 @@ JSON.parse(localStorage.getItem("matches")) || [];
 
 let goals = 0;
 let assists = 0;
+let totalRating = 0;
+let bestRating = 0;
 
 matches.forEach(match => {
+
     goals += Number(match.goals);
     assists += Number(match.assists);
+
+    const rating = Number(match.rating);
+
+    totalRating += rating;
+
+    if (rating > bestRating) {
+        bestRating = rating;
+    }
+});
+
+const averageRating =
+matches.length > 0
+? (totalRating / matches.length).toFixed(1)
+: "0.0";
+
+let recentForm = "";
+
+const lastFive =
+matches.slice(-5).reverse();
+
+lastFive.forEach(match => {
+    recentForm += `
+        <span style="
+        background:#334155;
+        padding:10px;
+        border-radius:10px;
+        margin:5px;
+        display:inline-block;">
+            ${match.rating}
+        </span>
+    `;
 });
 
 document.getElementById("stats").innerHTML = `
-    <h2>Matches Played: ${matches.length}</h2>
-    <h2>Goals: ${goals}</h2>
-    <h2>Assists: ${assists}</h2>
+
+<h2>Matches Played: ${matches.length}</h2>
+
+<h2>Goals: ${goals}</h2>
+
+<h2>Assists: ${assists}</h2>
+
+<h2>⭐ Average Rating: ${averageRating}</h2>
+
+<h2>🏆 Best Match Rating: ${bestRating}</h2>
+
+<h2>🔥 Recent Form</h2>
+
+<div>
+${recentForm}
+</div>
+
 `;
 
 </script>

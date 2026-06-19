@@ -26,8 +26,6 @@
 
 </div>
 
-<script src="script.js"></script>
-
 <script>
 
 const matches =
@@ -37,6 +35,9 @@ let goals = 0;
 let assists = 0;
 let totalRating = 0;
 let bestRating = 0;
+
+let mostGoalsInMatch = 0;
+let mostAssistsInMatch = 0;
 
 matches.forEach(match => {
 
@@ -50,6 +51,15 @@ matches.forEach(match => {
     if (rating > bestRating) {
         bestRating = rating;
     }
+
+    if (Number(match.goals) > mostGoalsInMatch) {
+        mostGoalsInMatch = Number(match.goals);
+    }
+
+    if (Number(match.assists) > mostAssistsInMatch) {
+        mostAssistsInMatch = Number(match.assists);
+    }
+
 });
 
 const averageRating =
@@ -63,6 +73,7 @@ const lastFive =
 matches.slice(-5).reverse();
 
 lastFive.forEach(match => {
+
     recentForm += `
         <span style="
         background:#334155;
@@ -73,6 +84,7 @@ lastFive.forEach(match => {
             ${match.rating}
         </span>
     `;
+
 });
 
 document.getElementById("stats").innerHTML = `
@@ -86,6 +98,16 @@ document.getElementById("stats").innerHTML = `
 <h2>⭐ Average Rating: ${averageRating}</h2>
 
 <h2>🏆 Best Match Rating: ${bestRating}</h2>
+
+<hr>
+
+<h2>📊 Personal Records</h2>
+
+<p>⚽ Most Goals In A Match: ${mostGoalsInMatch}</p>
+
+<p>🎯 Most Assists In A Match: ${mostAssistsInMatch}</p>
+
+<hr>
 
 <h2>🔥 Recent Form</h2>
 

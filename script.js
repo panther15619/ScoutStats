@@ -110,3 +110,34 @@ function saveMatch() {
 
     window.location.href = "dashboard.html";
 }
+const chartLabels = [];
+const chartRatings = [];
+
+matches.forEach((match, index) => {
+    chartLabels.push("Match " + (index + 1));
+    chartRatings.push(Number(match.rating));
+});
+
+const ctx = document
+    .getElementById("ratingChart")
+    .getContext("2d");
+
+new Chart(ctx, {
+    type: "line",
+    data: {
+        labels: chartLabels,
+        datasets: [{
+            label: "Match Rating",
+            data: chartRatings
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                min: 1,
+                max: 10
+            }
+        }
+    }
+});

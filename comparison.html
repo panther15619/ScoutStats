@@ -1,1 +1,128 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comparison Centre</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="profile-container">
+
+    <h1>📊 Comparison Centre</h1>
+
+    <div id="comparison"></div>
+
+    <br><br>
+
+    <button onclick="window.location.href='dashboard.html'">
+        Back To Dashboard
+    </button>
+
+</div>
+
+<script>
+
+const profile =
+JSON.parse(localStorage.getItem("playerProfile"));
+
+const matches =
+JSON.parse(localStorage.getItem("matches")) || [];
+
+let goals = 0;
+let assists = 0;
+let ratings = 0;
+
+matches.forEach(match => {
+
+    goals += Number(match.goals || 0);
+    assists += Number(match.assists || 0);
+    ratings += Number(match.rating || 0);
+
+});
+
+const games = matches.length || 1;
+
+const goalsPerGame =
+(goals / games).toFixed(2);
+
+const assistsPerGame =
+(assists / games).toFixed(2);
+
+const avgRating =
+(ratings / games).toFixed(1);
+
+let benchmarkGoals = 0.5;
+let benchmarkAssists = 0.3;
+let benchmarkRating = 7.2;
+
+if(profile.position === "Striker"){
+    benchmarkGoals = 0.7;
+    benchmarkAssists = 0.2;
+    benchmarkRating = 7.1;
+}
+
+if(profile.position === "Midfielder"){
+    benchmarkGoals = 0.3;
+    benchmarkAssists = 0.4;
+    benchmarkRating = 7.2;
+}
+
+if(profile.position === "Defender"){
+    benchmarkGoals = 0.1;
+    benchmarkAssists = 0.1;
+    benchmarkRating = 7.0;
+}
+
+if(profile.position === "Goalkeeper"){
+    benchmarkGoals = 0;
+    benchmarkAssists = 0;
+    benchmarkRating = 7.0;
+}
+
+let score = 0;
+
+if(Number(goalsPerGame) > benchmarkGoals) score++;
+if(Number(assistsPerGame) > benchmarkAssists) score++;
+if(Number(avgRating) > benchmarkRating) score++;
+
+let verdict = "🔴 Below Average";
+
+if(score >= 2){
+    verdict = "🟢 Above Average";
+}
+
+document.getElementById("comparison").innerHTML = `
+
+<h2>Position: ${profile.position}</h2>
+
+<hr>
+
+<h3>Your Performance</h3>
+
+<p>⚽ Goals Per Match: ${goalsPerGame}</p>
+
+<p>🎯 Assists Per Match: ${assistsPerGame}</p>
+
+<p>⭐ Average Rating: ${avgRating}</p>
+
+<hr>
+
+<h3>${profile.position} Benchmark</h3>
+
+<p>⚽ Goals Per Match: ${benchmarkGoals}</p>
+
+<p>🎯 Assists Per Match: ${benchmarkAssists}</p>
+
+<p>⭐ Average Rating: ${benchmarkRating}</p>
+
+<hr>
+
+<h2>${verdict}</h2>
+
+`;
+
+</script>
+
+</body>
+</html>
